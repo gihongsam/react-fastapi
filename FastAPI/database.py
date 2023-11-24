@@ -1,9 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # 환경변수 파일 로드
+
+database_url = os.getenv("DATABASE_URL")
 
 # 데이터베이스 URL 설정: 여기서는 SQLite를 사용
-URL_DATABASE = "sqlite:///./finance.db"
+URL_DATABASE = database_url
 
 # SQLAlchemy 엔진 생성: 데이터베이스와의 연결을 관리
 engine = create_engine(URL_DATABASE, connect_args={"check_same_thread": False})

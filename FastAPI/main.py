@@ -7,12 +7,17 @@ import models
 from fastapi.middleware.cors import CORSMiddleware
 import aiohttp
 import asyncio
+import os
+from dotenv import load_dotenv
 
+load_dotenv()  # 환경변수 파일 로드
 
 app = FastAPI()  # FastAPI 애플리케이션 인스턴스 생성
 
+domain = os.getenv("DOMAIN")
+
 # CORS 설정: 프론트엔드에서 백엔드에 접근할 수 있도록 설정
-origins = ["http://localhost:3000"]
+origins = [domain]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
