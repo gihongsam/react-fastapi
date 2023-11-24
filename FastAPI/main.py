@@ -5,6 +5,9 @@ from pydantic import BaseModel
 from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
+import aiohttp
+import asyncio
+
 
 app = FastAPI()  # FastAPI 애플리케이션 인스턴스 생성
 
@@ -48,6 +51,30 @@ db_dependency = Annotated[Session, Depends(get_db)]
 models.Base.metadata.create_all(bind=engine)  # 데이터베이스 테이블 생성
 
 
+async def naverdic(word_to_search):
+    # 네이버 영어사전 URL
+    url = f"https://ac-dict.naver.com/enko/ac?st=11&r_lt=11&q={word_to_search}"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as response:
+                if response.status == 200:
+                    dicResponse = await response.text()
+                    dicResponse = eval(dicResponse)
+                    if dicResponse["items"][0]:  # 사전에 없는 단어가 아닐 경우
+                        return (
+                            dicResponse["items"][0][0][0][0]
+                            + " : "
+                            + dicResponse["items"][0][0][2][0]
+                        )
+                    else:
+                        return "없는 단어입니다."
+                else:
+                    return "페이지를 가져오는 데 문제가 발생했습니다."
+    except aiohttp.ClientError as e:
+        return "요청 중 오류가 발생했습니다: " + str(e)
+
+
 # 거래 생성 API 엔드포인트
 @app.post("/transactions/", response_model=TransactionModel)
 async def create_transaction(transaction: TransactionBase, db: db_dependency):
@@ -63,3 +90,15 @@ async def create_transaction(transaction: TransactionBase, db: db_dependency):
 async def read_transactions(db: db_dependency, skip: int = 0, limit: int = 100):
     transactions = db.query(models.Transaction).offset(skip).limit(limit).all()
     return transactions
+
+
+@app.get("/naverdic/{word}")
+async def get_naver_dic(word: str):
+    return await naverdic(word)
+
+
+if __name__ == "__main__":
+    models.Base.metadata.create_all(bind=engine)
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react' // React와 필요한 훅 임포트
-import api from './api' // Axios 인스턴스를 api.js에서 임포트
+import api from './api';
 
-const App = () => {
+const Finance = () => {
   // 거래 데이터와 폼 데이터의 상태를 관리하는 훅
   const [transactions, setTransactions] = useState([]); // 거래 데이터 상태
   const [formData, setFormData] = useState({ // 폼 데이터 상태
@@ -46,20 +46,12 @@ const App = () => {
     });
   };
 
-  // UI 렌더링 부분
-  return(
+  return (
     <div>
-      {/* 네비게이션 바 */}
-      <nav className='navbar navbar-dark bg-primary'>
-        <div className='container-fluid'>
-          <a className='navbar-brand' href="#!">
-            Finance APP
-          </a>
-        </div>
-      </nav>
-
-      {/* 거래 데이터 입력 폼 */}
-      <div className='container'>
+      <h2>Finance Page</h2>
+      {/* 여기에 Finance 관련 컨텐츠를 구현 */}
+            {/* 거래 데이터 입력 폼 */}
+            <div className='container'>
         <form onSubmit={handleFormSubmit}>
           {/* 금액 입력 필드 */}
           <div className='mb-3 mt-3'>
@@ -133,7 +125,7 @@ const App = () => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App; // App 컴포넌트 내보내기
+export default Finance;

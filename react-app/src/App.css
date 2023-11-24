@@ -1,0 +1,147 @@
+/* App.css */
+
+/* Basic resets for consistency */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.container {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: .5rem;
+  color: #666;
+}
+
+.form-control {
+  width: 100%;
+  padding: .5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+
+
+.file-input {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}
+
+.sidebar {
+  background: #a8d5e5;
+  height: 100%;
+
+}
+
+h1 {
+  color: #165a72;
+  margin: 50px auto;
+  font-size: 40px;
+}
+.menu1 {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+
+.navbar {
+  flex: 1; /* 좌측 네비게이션 바 */
+}
+
+.content {
+  flex: 3; /* 우측 콘텐츠 영역 */
+}
+
+.result-box {
+  position: relative;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-box h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.result-box ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.result-box li {
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.result-box li:hover {
+  background-color: #e2e6ea;
+}
+
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0.5rem 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+  background-color: #218838;
+}
